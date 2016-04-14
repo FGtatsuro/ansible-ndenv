@@ -20,6 +20,10 @@ Role Variables
 
 The variables we can use in this role.
 
+|name|description|default|
+|---|---|---|
+|ndenv_node_version|Installed node version with ndenv.|It isn't defined in default. No nodejs is installed.|
+
 Role Dependencies
 -----------------
 
@@ -46,6 +50,19 @@ Local requirements are as follows.
 
 - Ansible (>= 2.0.0)
 - Docker (>= 1.10.1)
+
+Notes
+-----
+
+If you want to install multiple versions of nodejs, please assign this role several times.
+
+```yaml
+---
+- hosts: all
+  roles:
+    - { role: ndenv,  ndenv_node_version: 'v0.10.40' }
+    - { role: ndenv,  ndenv_node_version: 'v0.12.4' }
+```
 
 License
 -------
