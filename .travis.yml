@@ -6,6 +6,7 @@ matrix:
       language: generic
       env:
         - TARGET=localhost
+        - EXTRA_VARS="anyenv_home='/Users/travis' anyenv_owner='travis' anyenv_group='staff'"
     - os: linux
       dist: trusty
       language: python
@@ -54,7 +55,7 @@ install:
 script:
   # Basic role syntax check
   - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
-  - ansible-playbook tests/test.yml -i tests/inventory -l ${TARGET} -vvvv
+  - ansible-playbook tests/test.yml -i tests/inventory -l ${TARGET} --extra-vars="${EXTRA_VARS}" -vvvv
   - bundle exec rake spec SPEC_TARGET=${TARGET}
 
 notifications:
