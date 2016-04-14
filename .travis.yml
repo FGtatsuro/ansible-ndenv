@@ -6,7 +6,7 @@ matrix:
       language: generic
       env:
         - TARGET=localhost
-        - EXTRA_VARS="anyenv_home='/Users/travis' anyenv_owner='travis' anyenv_group='staff'"
+        - EXTRA_VARS="anyenv_home='/Users/travis' anyenv_owner='travis' anyenv_group='staff' anyenv_profile='.bash_profile'"
     - os: linux
       dist: trusty
       language: python
