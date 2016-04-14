@@ -7,11 +7,15 @@
   register: result_ndenv_versions
   ignore_errors: yes
   changed_when: no
+  become: yes
+  become_user: "{{ anyenv_owner }}"
 - name: Install ndenv
   shell: "/bin/bash -lc 'anyenv install ndenv'"
   become: yes
+  become_user: "{{ anyenv_owner }}"
   when: "result_ndenv_versions.rc != 0"
 - name: Install nodejs
   shell: "/bin/bash -lc 'ndenv install {{ ndenv_node_version }}'"
   become: yes
+  become_user: "{{ anyenv_owner }}"
   when: "ndenv_node_version is defined and ndenv_node_version not in result_ndenv_versions.stdout"
