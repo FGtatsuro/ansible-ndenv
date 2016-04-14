@@ -6,6 +6,7 @@ matrix:
       language: generic
       env:
         - TARGET=localhost
+        - EXTRA_VARS="anyenv_home='/Users/travis' anyenv_owner='travis' anyenv_group='staff' anyenv_profile='.bash_profile'"
     - os: linux
       dist: trusty
       language: python
@@ -48,13 +49,13 @@ sudo: required
 install:
   - sudo pip install ansible
   # Resolve dependencies(When target role isn't installed via Ansible Galaxy, auto resolution of dependencies doesn't occur.)
-  - ansible-galaxy install FGtatsuro.python-requirements
+  - ansible-galaxy install -r role_requirements.yml
   - bundle install
 
 script:
   # Basic role syntax check
   - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
-  - ansible-playbook tests/test.yml -i tests/inventory -l ${TARGET} -vvvv
+  - ansible-playbook tests/test.yml -i tests/inventory -l ${TARGET} --extra-vars="${EXTRA_VARS}" -vvvv
   - bundle exec rake spec SPEC_TARGET=${TARGET}
 
 notifications:

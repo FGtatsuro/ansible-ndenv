@@ -1,4 +1,21 @@
 ---
 # tasks file for ndenv
-- name: Run specified tasks on current platform 
+- name: Run specified tasks on current platform
   include: "{{ ansible_os_family }}.yml"
+- name: Check whether ndenv is installed
+  shell: "{{ ndenv_login_shell }} -lc 'ndenv versions'"
+  register: result_ndenv_versions
+  ignore_errors: yes
+  changed_when: no
+  become: yes
+  become_user: "{{ anyenv_owner }}"
+- name: Install ndenv
+  shell: "{{ ndenv_login_shell }} -lc 'anyenv install ndenv'"
+  become: yes
+  become_user: "{{ anyenv_owner }}"
+  when: "result_ndenv_versions.rc != 0"
+- name: Install nodejs
+  shell: "{{ ndenv_login_shell }} -lc 'ndenv install {{ ndenv_node_version }}'"
+  become: yes
+  become_user: "{{ anyenv_owner }}"
+  when: "ndenv_node_version is defined and ndenv_node_version not in result_ndenv_versions.stdout"

@@ -2,4 +2,5 @@
 - hosts: all
   remote_user: root
   roles:
-    - { role: ndenv }
+    - { role: ndenv,  ndenv_node_version: 'v0.10.40' }
+    - { role: ndenv,  ndenv_node_version: 'v0.12.4' }
