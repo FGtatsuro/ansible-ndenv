@@ -1,3 +1,4 @@
 ---
 # defaults file for ndenv
 ndenv_login_shell: "/bin/bash"
+ndenv_set_global: False
