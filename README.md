@@ -23,6 +23,7 @@ The variables we can use in this role.
 |name|description|default|
 |---|---|---|
 |ndenv_node_version|Installed node version with ndenv.|It isn't defined in default. No nodejs is installed.|
+|ndenv_set_global|If `ndenv_node_version` is defined and this value is True, <br>this version is used as global in target host.|False|
 |ndenv_login_shell|Login shell used when this role installs ndenv and nodejs.|/bin/bash|
 
 Role Dependencies
