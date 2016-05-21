@@ -5,6 +5,11 @@ describe command("/bin/bash -lc 'ndenv versions'") do
   its(:stdout) { should contain('v0.12.4') }
 end
 
+describe command("/bin/bash -lc 'ndenv global'") do
+  its(:stdout) { should contain('v0.10.40') }
+  its(:stdout) { should_not contain('v0.12.4') }
+end
+
 describe command("/bin/bash -lc 'node --version'") do
   its(:stdout) { should contain('v0.10.40') }
   its(:stdout) { should_not contain('v0.12.4') }
