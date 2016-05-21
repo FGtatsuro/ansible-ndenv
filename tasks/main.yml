@@ -14,8 +14,13 @@
   - name: Install nodejs
     shell: "{{ ndenv_login_shell }} -lc 'ndenv install {{ ndenv_node_version }}'"
     when: "ndenv_node_version is defined and ndenv_node_version not in result_ndenv_versions.stdout"
+  - name: Check default version
+    shell: "{{ ndenv_login_shell }} -lc 'ndenv global'"
+    register: result_ndenv_global
+    changed_when: no
+    when: "ndenv_node_version is defined and ndenv_set_global"
   - name: Set default version
     shell: "{{ ndenv_login_shell }} -lc 'ndenv global {{ ndenv_node_version }}'"
-    when: "ndenv_node_version is defined and ndenv_set_global"
+    when: "ndenv_node_version is defined and ndenv_set_global and ndenv_node_version not in result_ndenv_global.stdout"
   become: yes
   become_user: "{{ anyenv_owner }}"
