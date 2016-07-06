@@ -1,4 +1,8 @@
 ---
+branches:
+  only:
+  - master
+
 # https://docs.travis-ci.com/user/multi-os/
 matrix:
   include:
@@ -8,6 +12,11 @@ matrix:
         - TARGET=localhost
         - EXTRA_VARS="anyenv_home='/Users/travis' anyenv_owner='travis' anyenv_group='staff' anyenv_profile='.bash_profile'"
         - PYTHONPATH="/Library/Python/2.7/site-packages:$PYTHONPATH"
+      install:
+        - sudo pip install -U setuptools
+        - sudo pip install ansible
+        - ansible-galaxy install -r role_requirements.yml
+        - bundle install
     - os: linux
       dist: trusty
       language: python
@@ -31,8 +40,7 @@ matrix:
 sudo: required
 
 install:
-  - sudo pip install -U setuptools
-  - sudo pip install ansible
+  - pip install ansible
   # Resolve dependencies(When target role isn't installed via Ansible Galaxy, auto resolution of dependencies doesn't occur.)
   - ansible-galaxy install -r role_requirements.yml
   - bundle install
