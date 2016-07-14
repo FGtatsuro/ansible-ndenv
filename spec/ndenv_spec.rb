@@ -16,7 +16,7 @@ describe command("su -s /bin/bash -c 'node --version' - #{ENV['ANYENV_OWNER']}")
 end
 
 # Check whether variables of 'FGtatsuro.anyenv' affects the behavior of this role properly.
-describe file("#{ENV['ANY_ENV_HOME']}/.anyenv/envs/ndenv/bin/ndenv") do
+describe file("#{ENV['ANYENV_HOME']}/.anyenv/envs/ndenv/bin/ndenv") do
   it { should exist }
 end
 

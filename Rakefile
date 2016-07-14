@@ -39,7 +39,7 @@ namespace :spec do
       ENV['TARGET_HOST'] = host[:name]
       ENV['SPEC_TARGET_BACKEND'] = host[:backend]
       ENV['ANYENV_OWNER'] = host[:anyenv_owner]
-      ENV['ANY_ENV_HOME'] = host[:anyenv_home]
+      ENV['ANYENV_HOME'] = host[:anyenv_home]
       t.pattern = "spec/ndenv_spec.rb"
     end
   end
