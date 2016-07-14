@@ -61,11 +61,12 @@ Notes
   ---
   - hosts: all
     roles:
-      - { role: ndenv,  ndenv_node_version: 'v0.10.40' }
-      - { role: ndenv,  ndenv_node_version: 'v0.12.4' }
+      - { role: FGtatsuro.ndenv,  ndenv_node_version: 'v0.10.40' }
+      - { role: FGtatsuro.ndenv,  ndenv_node_version: 'v0.12.4' }
   ```
 
 - `anyenv_profile` variable of `FGtatsuro.anyenv` must exist on path `ndenv_login_shell` can load automatically. For example, the combination of `ndenv_login_shell=/bin/bash` and `anyenv_profile=.bash_profile` will be good.
+- Tasks of this role are executed by `anyenv_owner`(variable of `FGtatsuro.anyenv`).
 
 License
 -------
