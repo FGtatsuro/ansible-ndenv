@@ -1,16 +1,16 @@
 require "spec_helper_#{ENV['SPEC_TARGET_BACKEND']}"
 
-describe command("/bin/bash -lc 'ndenv versions'") do
+describe command("su -s /bin/bash -c 'ndenv versions' - #{ENV['ANYENV_OWNER']}") do
   its(:stdout) { should contain('v0.10.40') }
   its(:stdout) { should contain('v0.12.4') }
 end
 
-describe command("/bin/bash -lc 'ndenv global'") do
+describe command("su -s /bin/bash -c 'ndenv global' - #{ENV['ANYENV_OWNER']}") do
   its(:stdout) { should contain('v0.10.40') }
   its(:stdout) { should_not contain('v0.12.4') }
 end
 
-describe command("/bin/bash -lc 'node --version'") do
+describe command("su -s /bin/bash -c 'node --version' - #{ENV['ANYENV_OWNER']}") do
   its(:stdout) { should contain('v0.10.40') }
   its(:stdout) { should_not contain('v0.12.4') }
 end
