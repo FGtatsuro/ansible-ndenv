@@ -25,3 +25,5 @@
     when: "ndenv_global_version is defined and ndenv_global_version not in result_ndenv_global.stdout"
   become: yes
   become_user: "{{ anyenv_owner }}"
+  # Ref. https://github.com/ansible/ansible/pull/13424
+  remote_user: "{{ anyenv_owner }}"
