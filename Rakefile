@@ -15,6 +15,11 @@ namespace :spec do
       :name     =>  'container',
       :backend  =>  'docker',
       :anyenv_home  => '/root'
+    },
+    {
+      :name     =>  'container_with_specified_user',
+      :backend  =>  'docker',
+      :anyenv_home  => '/home/jenkins'
     }
   ]
   if ENV['SPEC_TARGET'] then

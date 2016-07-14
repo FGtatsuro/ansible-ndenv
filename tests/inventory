@@ -3,3 +3,4 @@ localhost       ansible_connection=local
 
 [docker_container]
 container       ansible_connection=docker
+container_with_specified_user   ansible_connection=docker
