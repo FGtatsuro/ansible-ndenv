@@ -21,8 +21,8 @@ The variables we can use in this role.
 
 |name|description|default|
 |---|---|---|
-|ndenv_node_version|Installed node version with ndenv.|It isn't defined in default. No nodejs is installed.|
-|ndenv_set_global|If `ndenv_node_version` is defined and this value is True, <br>this version is used as global in target host.|False|
+|ndenv_node_versions|Installed node version with ndenv.|Empty list. No nodejs is installed.|
+|ndenv_global_version|This version is used as global in target host.|It isn't defined in default. Default version isn't set.|
 |ndenv_login_shell|Login shell used when this role installs ndenv and nodejs.|/bin/bash|
 
 Role Dependencies
@@ -54,16 +54,6 @@ Local requirements are as follows.
 
 Notes
 -----
-
-- If you want to install multiple versions of nodejs, please assign this role several times.
-
-  ```yaml
-  ---
-  - hosts: all
-    roles:
-      - { role: FGtatsuro.ndenv,  ndenv_node_version: 'v0.10.40' }
-      - { role: FGtatsuro.ndenv,  ndenv_node_version: 'v0.12.4' }
-  ```
 
 - `anyenv_profile` variable of `FGtatsuro.anyenv` must exist on path `ndenv_login_shell` can load automatically. For example, the combination of `ndenv_login_shell=/bin/bash` and `anyenv_profile=.bash_profile` will be good.
 - Tasks of this role are executed by `anyenv_owner`(variable of `FGtatsuro.anyenv`).
