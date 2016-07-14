@@ -9,7 +9,6 @@ namespace :spec do
     {
       :name     =>  'localhost',
       :backend  =>  'exec',
-      :anyenv_owner => 'travis',
       :anyenv_home  => '/Users/travis'
     },
     {
@@ -38,7 +37,7 @@ namespace :spec do
     RSpec::Core::RakeTask.new(host[:name].to_sym) do |t|
       ENV['TARGET_HOST'] = host[:name]
       ENV['SPEC_TARGET_BACKEND'] = host[:backend]
-      ENV['ANYENV_OWNER'] = host[:anyenv_owner]
+      ENV['ANYENV_OWNER'] = host[:anyenv_owner] || nil
       ENV['ANYENV_HOME'] = host[:anyenv_home]
       t.pattern = "spec/ndenv_spec.rb"
     end
