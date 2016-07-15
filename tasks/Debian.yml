@@ -1,2 +1,24 @@
 ---
 # tasks file for ndenv(On Debian family)
+- block:
+  - name: Check whether ndenv is installed
+    shell: "su -s {{ ndenv_login_shell }} -c 'ndenv versions' - {{ anyenv_owner }}"
+    register: result_ndenv_versions
+    ignore_errors: yes
+    changed_when: no
+  - name: Install ndenv
+    shell: "su -s {{ ndenv_login_shell }} -c 'anyenv install ndenv' - {{ anyenv_owner }}"
+    when: "result_ndenv_versions.rc != 0"
+  - name: Install nodejs
+    shell: "su -s {{ ndenv_login_shell }} -c 'ndenv install {{ item }}' - {{ anyenv_owner }}"
+    when: "item not in result_ndenv_versions.stdout"
+    with_items: "{{ ndenv_node_versions }}"
+  - name: Check default version
+    shell: "su -s {{ ndenv_login_shell }} -c 'ndenv global' - {{ anyenv_owner }}"
+    register: result_ndenv_global
+    changed_when: no
+    when: "ndenv_global_version is defined"
+  - name: Set default version
+    shell: "su -s {{ ndenv_login_shell }} -c 'ndenv global {{ ndenv_global_version }}' - {{ anyenv_owner }}"
+    when: "ndenv_global_version is defined and ndenv_global_version not in result_ndenv_global.stdout"
+  become: yes
