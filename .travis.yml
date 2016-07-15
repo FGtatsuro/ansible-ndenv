@@ -21,6 +21,23 @@ matrix:
       dist: trusty
       language: python
       python: 2.7
+      addons:
+        apt:
+          packages:
+          - python-pip
+      before_script:
+        - sudo groupadd jenkins
+        - sudo useradd -s /bin/bash -d /home/jenkins -m -g jenkins jenkins
+        - sudo pip install ansible
+        - ansible-galaxy install -r role_requirements.yml
+        - bundle install
+      env:
+        - TARGET=localhost_linux
+        - EXTRA_VARS="anyenv_home='/home/travis' anyenv_owner='travis' anyenv_group='travis' anyenv_profile='.bash_profile'"
+    - os: linux
+      dist: trusty
+      language: python
+      python: 2.7
       services:
         - docker
       addons:
