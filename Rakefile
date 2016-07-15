@@ -12,6 +12,12 @@ namespace :spec do
       :anyenv_home  => '/Users/travis'
     },
     {
+      :name     =>  'localhost_linux',
+      :backend  =>  'exec',
+      :anyenv_owner => 'jenkins',
+      :anyenv_home  => '/home/travis'
+    },
+    {
       :name     =>  'container',
       :backend  =>  'docker',
       :anyenv_owner => 'root',
