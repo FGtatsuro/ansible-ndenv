@@ -19,11 +19,11 @@ Role Variables
 
 The variables we can use in this role.
 
-|name|description|default|
-|---|---|---|
-|ndenv_node_versions|Installed node version with ndenv.|Empty list. No nodejs is installed.|
-|ndenv_global_version|This version is used as global in target host.|It isn't defined in default. Default version isn't set.|
-|ndenv_login_shell|Login shell used when this role installs ndenv and nodejs.|/bin/bash|
+|name|description|type|default|
+|---|---|---|---|
+|ndenv_node_versions|Installed node version with ndenv.|list|It isn't defined in default. No nodejs is installed.|
+|ndenv_global_version|This version is used as global in target host.|str|It isn't defined in default. Default version isn't set.|
+|ndenv_login_shell|Login shell used when this role installs ndenv and nodejs.|str|/bin/bash|
 
 Role Dependencies
 -----------------
