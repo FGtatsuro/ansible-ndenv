@@ -11,7 +11,7 @@
     when: "result_ndenv_versions.rc != 0"
   - name: Install nodejs
     shell: "{{ ndenv_login_shell }} -lc 'ndenv install {{ item }}'"
-    when: "item not in result_ndenv_versions.stdout"
+    when: "ndenv_node_versions is defined and item not in result_ndenv_versions.stdout"
     with_items: "{{ ndenv_node_versions }}"
   - name: Check default version
     shell: "{{ ndenv_login_shell }} -lc 'ndenv global'"

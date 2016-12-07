@@ -26,7 +26,7 @@
     shell: "su -s {{ ndenv_login_shell }} -c 'ndenv install {{ item }}' - {{ anyenv_owner }}"
     args:
       warn: no
-    when: "item not in result_ndenv_versions.stdout"
+    when: "ndenv_node_versions is defined and item not in result_ndenv_versions.stdout"
     with_items: "{{ ndenv_node_versions }}"
   - name: Check default version
     shell: "su -s {{ ndenv_login_shell }} -c 'ndenv global' - {{ anyenv_owner }}"
